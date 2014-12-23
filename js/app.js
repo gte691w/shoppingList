@@ -1,12 +1,11 @@
 $(document).ready(function(){
 	var count = 0;
 	$("#add").on('click', function(event){
-	  //$("input#item").on('keypress', function(e){
 		var itemAdded = $("input#item").val();
 		var searchInput = $('input#item');
 		// The focus method will keep the cursor in the input box
 		searchInput.focus();
-		//if (e.keyCode == '13'){
+		if(itemAdded.length > 0){
 		  $("input#item").val("");
 		  $('<li>'+itemAdded+'</li>').append(" <span class='check'>&#10004;</span>"+" <span class='delete'>&#x2716;</span>").appendTo("ul#list").hide().slideDown();
 		  count++;
@@ -15,7 +14,12 @@ $(document).ready(function(){
 		
 		  
 
-		//}
+		}
+
+		else{
+
+			alert("Please Enter An Items")
+		}
 
 		
 		
