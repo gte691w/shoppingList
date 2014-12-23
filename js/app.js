@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	var count = 0;
-	var arr = [];
 	$("#add").on('click', function(event){
 	  //$("input#item").on('keypress', function(e){
 		var itemAdded = $("input#item").val();
@@ -10,37 +9,46 @@ $(document).ready(function(){
 		//if (e.keyCode == '13'){
 		  $("input#item").val("");
 		  $('<li>'+itemAdded+'</li>').append(" <span class='check'>&#10004;</span>"+" <span class='delete'>&#x2716;</span>").appendTo("ul#list").hide().slideDown();
-		  arr.push(count);
 		  count++;
 		
 		  $(".quant").text(count);
 		
-		  $('.check').off('click').on('click', function(){
-			
-			$(this).closest("li").html("<strike>"+$(this).closest("li").html()+"</strike>");
+		  
+
+		//}
+
+		
+		
+	});
+
+
+	$("input#item").on('keypress', function(e){
+			if (e.keyCode == '13'){
+				$('#add').click();
+			}
+		});
+
+
+	 $('ul').on('click','.check', function(){			
+	   $(this).closest("li").toggleClass('strike');//For "Class" methods "." is not used for the class name. In this case ".strike"
 			//the above code is a better method of striking through the list items. As opposed
 			//to using the wrap method, the above will remove all strikes once deleted.
 		});
 
-		//}
-
-		$('.delete').off('click').on('click', function(){
-			arr.pop();
+	 $('ul#list').on('click','.delete', function(){
+			count--
 			$(this).closest("li").fadeOut(300, function() { $(this).remove().slideUp() });
-			if(arr.length > 0){
-				$(".quant").text(arr.length);
+			if(count > 0){
+				$(".quant").text(count);
 			}
 			else{
 				$(".quant").text(0);
 			}
 		});
+
 		
 		$("#cross").off('click').on('click', function(){
-			
-			$("#list").find("li").each(function(){
-				$(this).html("<strike>"+$(this).html()+"</strike>");
-			});
-
+			$('ul#list li').toggleClass('strike');
 		});
 
 
@@ -48,10 +56,6 @@ $(document).ready(function(){
 			$("#list").find("li").fadeOut(300, function() { $(this).remove().slideUp() });
 			count = 0;
 			$(".quant").text(count);
-
-		});
-		
 	});
-	event.preventDefault();
 });
 

@@ -55,6 +55,10 @@ li{
   padding-bottom: 300px;
 }
 
+.strike{
+	text-decoration: line-through;
+}
+
 #footer {
 position: absolute;
 margin-top: 16em;
