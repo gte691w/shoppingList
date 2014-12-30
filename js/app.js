@@ -5,7 +5,7 @@ $(document).ready(function(){
 		var searchInput = $('input#item');
 		// The focus method will keep the cursor in the input box
 		searchInput.focus();
-		if(itemAdded.length > 0){
+		if(itemAdded.trim().length > 0){
 		  $("input#item").val("");
 		  $('<li>'+itemAdded+'</li>').append(" <span class='check'>&#10004;</span>"+" <span class='delete'>&#x2716;</span>").appendTo("ul#list").hide().slideDown();
 		  count++;
@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 
 	$("input#item").on('keypress', function(e){
-			if (e.keyCode == '13'){
+			if (e.keyCode == 13){
 				$('#add').click();
 			}
 		});
@@ -52,7 +52,14 @@ $(document).ready(function(){
 
 		
 		$("#cross").off('click').on('click', function(){
-			$('ul#list li').toggleClass('strike');
+			if($(this).text() == 'Check All'){
+        		$('li').addClass('strike');
+        		$(this).text('Uncheck All');
+        	}
+		    else{
+		        $('li').removeClass('strike');
+		        $(this).text('Check All');
+		    }
 		});
 
 
